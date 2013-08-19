@@ -120,6 +120,7 @@ mkdir -p "$SBT_USER_HOME/.sbt/plugins"
 cp $OPT_DIR/$HEROKU_PLUGIN $SBT_USER_HOME/.sbt/plugins/$HEROKU_PLUGIN
 
 echo "copy over the credentials file..."
+mkdir -p "$SBT_USER_HOME_ABSOLUTE/.ivy2"
 cp "/root/.ivy2/.credentials" "$SBT_USER_HOME_ABSOLUTE/.ivy2/.credentials"
 
 # build app
