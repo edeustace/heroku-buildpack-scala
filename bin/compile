@@ -53,6 +53,8 @@ for DIR in $CACHED_DIRS; do
     mkdir -p $DIR
     echo "copy over cache: $CACHE_DIR/$DIR -> $DIR"
     cp -r $CACHE_DIR/$DIR/.  $DIR
+  else
+    echo "$CACHE_DIR/$DIR does not exist"
   fi
 done
 
@@ -117,6 +119,9 @@ HEROKU_PLUGIN="HerokuPlugin.scala"
 mkdir -p "$SBT_USER_HOME/.sbt/plugins"
 cp $OPT_DIR/$HEROKU_PLUGIN $SBT_USER_HOME/.sbt/plugins/$HEROKU_PLUGIN
 
+echo "copy over the credentials file..."
+cp "/root/.ivy2/.credentials" "$SBT_USER_HOME_ABSOLUTE/.ivy2/.credentials"
+
 # build app
 echo "-----> Running: sbt $SBT_TASKS"
 test -e "$SBT_BINDIR"/sbt.boot.properties && PROPS_OPTION="-Dsbt.boot.properties=$SBT_BINDIR/sbt.boot.properties"
@@ -140,6 +145,8 @@ for DIR in $CACHED_DIRS ; do
   if [ -d $DIR ] ; then
     echo "Re packaging the cache : $DIR -> $CACHE_DIR/$DIR"
     cp -r $DIR/.  $CACHE_DIR/$DIR
+  else
+    echo "$DIR does not exist"
   fi
 done
 
